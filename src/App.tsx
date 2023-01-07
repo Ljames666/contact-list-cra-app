@@ -1,13 +1,15 @@
-import React from 'react';
-import Home from './pages/home/Home';
+import { BrowserRouter } from 'react-router-dom';
 import LayoutDefault from './config/layout/LayoutDefault';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
     const Layout = LayoutDefault;
     return (
-        <Layout>
-            <Home />
-        </Layout>
+        <BrowserRouter>
+            <Layout>
+                <AppRoutes />
+            </Layout>
+        </BrowserRouter>
     );
 }
 
