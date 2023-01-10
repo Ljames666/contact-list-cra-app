@@ -11,7 +11,7 @@ function LayoutDefault({ children }: IPropsLayout) {
             <div style={{ height: '10%', paddingTop: 10 }}>
                 <Header />
             </div>
-            <div style={{ height: '80%', border: '2px solid black' }}>{children}</div>
+            <div style={{ minHeight: '75%' }}>{children}</div>
             <div
                 style={{
                     height: '10%',

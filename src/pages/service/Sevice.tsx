@@ -1,13 +1,33 @@
+import { styled } from '@mui/material/styles';
+import CardIcon from '../../shared/components/card-icon/CardIcon';
+import { Typography, Grid, Box } from '@mui/material';
+import dataService from '../../shared/data/dataService';
+
+const StyledService = styled(Box)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    maxWidth: '1097px',
+    margin: '1.5rem auto',
+    color: 'white',
+}));
+
 function Service() {
     return (
-        <>
-            <h1> Service</h1>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla veritatis
-                consequatur nemo error, natus dignissimos. Necessitatibus quos esse aut nam at
-                reprehenderit hic error quod, unde quae beatae repellendus maxime.
-            </p>
-        </>
+        <StyledService component="section">
+            <Typography variant="h2" mt={2} mb={2}>
+                My Best Services
+            </Typography>
+
+            <Grid container spacing={2}>
+                {dataService.map((service) => (
+                    <Grid item xs={4}>
+                        <CardIcon icon={service.icon} title={service.title} txt={service.txt} />
+                    </Grid>
+                ))}
+            </Grid>
+        </StyledService>
     );
 }
 
