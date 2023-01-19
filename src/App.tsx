@@ -1,16 +1,7 @@
-import { BrowserRouter } from 'react-router-dom';
-import LayoutDefault from './config/layout/LayoutDefault';
-import AppRoutes from './routes/AppRoutes';
+import RoutesApp from './routes/RoutesApp';
 
 function App() {
-    const Layout = LayoutDefault;
-    return (
-        <BrowserRouter>
-            <Layout>
-                <AppRoutes />
-            </Layout>
-        </BrowserRouter>
-    );
+    return <RoutesApp />;
 }
 
 export default App;

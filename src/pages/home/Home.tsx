@@ -8,6 +8,7 @@ import getStorages from '../../utils/functions/storage/getStorage';
 import { v4 } from 'uuid';
 import setStorages from '../../utils/functions/storage/setStorage';
 import removeStorage from '../../utils/functions/storage/removeStorage';
+import ModalShow from '../../components/modal-show/ModalShow';
 
 type HomeProps = {
     homeState: string;
@@ -103,12 +104,11 @@ function Home({ homeState }: HomeProps) {
                             borderRadius: '10px',
                             padding: 2,
                             margin: '10px 0px',
-                        }}
-                    >
+                        }}>
                         <TextField
-                            id="input-name"
-                            label="Nome"
-                            variant="outlined"
+                            id='input-name'
+                            label='Nome'
+                            variant='outlined'
                             focused
                             sx={{ margin: '0 2px' }}
                             value={name}
@@ -119,9 +119,9 @@ function Home({ homeState }: HomeProps) {
                             onChange={(e) => setName(e.target.value)}
                         />
                         <TextField
-                            id="input-email"
-                            label="Email"
-                            variant="outlined"
+                            id='input-email'
+                            label='Email'
+                            variant='outlined'
                             focused
                             sx={{ margin: '0 2px' }}
                             value={email}
@@ -132,9 +132,9 @@ function Home({ homeState }: HomeProps) {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <TextField
-                            id="input-telefone"
-                            label="Telefone"
-                            variant="outlined"
+                            id='input-telefone'
+                            label='Telefone'
+                            variant='outlined'
                             focused
                             sx={{ margin: '0 2px' }}
                             value={phone}
@@ -145,9 +145,9 @@ function Home({ homeState }: HomeProps) {
                             onChange={(e) => setPhone(e.target.value)}
                         />
                         <TextField
-                            id="input-endereco"
-                            label="Endereço"
-                            variant="outlined"
+                            id='input-endereco'
+                            label='Endereço'
+                            variant='outlined'
                             focused
                             sx={{ margin: '0 2px' }}
                             value={address}
@@ -157,8 +157,8 @@ function Home({ homeState }: HomeProps) {
                             onKeyDown={(e) => nextInput(e)}
                             onChange={(e) => setAddress(e.target.value)}
                         />
-                        <IconButton color="primary" size="large" onClick={handleSubmit}>
-                            <SendIcon fontSize="large" />
+                        <IconButton color='primary' size='large' onClick={handleSubmit}>
+                            <SendIcon fontSize='large' />
                         </IconButton>
                     </Box>
 
@@ -170,12 +170,11 @@ function Home({ homeState }: HomeProps) {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                            }}
-                        >
+                            }}>
                             {searchContacts.length ? (
                                 <>
                                     <Box>
-                                        <Button variant="contained" onClick={handleClearSearch}>
+                                        <Button variant='contained' onClick={handleClearSearch}>
                                             Apagar Pesquisa
                                         </Button>
                                     </Box>
@@ -208,6 +207,7 @@ function Home({ homeState }: HomeProps) {
                     )}
                 </Grid>
             </Grid>
+            <ModalShow />
         </Main>
     );
 }

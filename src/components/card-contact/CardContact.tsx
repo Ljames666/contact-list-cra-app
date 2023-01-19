@@ -18,6 +18,7 @@ export type CardProps = {
     email: string;
     phone: string;
     address: string;
+    
 };
 
 export default function CardContact({ id, name, email, phone, address }: CardProps) {
