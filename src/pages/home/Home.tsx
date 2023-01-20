@@ -26,6 +26,9 @@ const Main = styled(Box)(() => ({
 function Home({ homeState }: HomeProps) {
     const dispatch = useDispatch();
 
+    /* abaixo carregamos o estado de contatos pra uso,contatoSelectAll é variavel da linha 35 
+    lá no contatos Slice, se não fizer assim deve usar o useSelector assim:
+     *** = useSelector((state)=>state.nomedoreducer)*/
     const contatosRedux = useSelector(contatoSelectAll);
 
     const [name, setName] = useState<string>('');

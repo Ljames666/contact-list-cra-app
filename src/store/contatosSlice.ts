@@ -22,6 +22,7 @@ type ContatoState = {
 };
 
 const initialState: ContatoState = {
+    // criado aqui para não poluir no slice
     loading: false,
     showModal: {
         open: false,
@@ -29,11 +30,14 @@ const initialState: ContatoState = {
     },
     listaContatos: [],
 };
+
+// armazena a chamado do estado em variavel pra facilitar o uso no useSelector
 export const contatoSelectAll = (state: AppState) => state.contato;
 
+// esse é o pradão para todo slice é um objeto {name,intialState,reducers,extraReducers}
 const contatoSlice = createSlice({
     name: 'contatos',
-    initialState,
+    initialState, // foi criado na linha 24
     reducers: {
         clearState: () => initialState, // reducer para voltar ao estado inicial
         addContato: (state, action) => {
@@ -45,5 +49,5 @@ const contatoSlice = createSlice({
     extraReducers: {},
 });
 
-export const { clearState, addContato } = contatoSlice.actions;
+export const { clearState, addContato } = contatoSlice.actions; // exporta as ações(metodos) do reducer (linha 41)
 export default contatoSlice.reducer;
