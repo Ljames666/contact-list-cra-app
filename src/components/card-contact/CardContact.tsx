@@ -11,17 +11,11 @@ import {
     CardActions,
     Divider,
 } from '@mui/material';
+import { Contato } from '../../store/contatosSlice';
 
-export type CardProps = {
-    id?: string;
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    
-};
 
-export default function CardContact({ id, name, email, phone, address }: CardProps) {
+
+export default function CardContact({ id, name, email, phone, address }: Contato) {
     const stringToColor = (string: string) => {
         let hash = 0;
         let i;

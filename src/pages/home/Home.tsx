@@ -1,6 +1,6 @@
-import { Box, IconButton, Divider, Grid, TextField, Button } from '@mui/material';
-import CardContact, { CardProps } from '../../components/card-contact/CardContact';
-import { AppRoutes } from '../../routes/RoutesApp';
+import { Box, IconButton, Grid, TextField, Button } from '@mui/material';
+import CardContact from '../../components/card-contact/CardContact';
+
 import { styled } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
 import { useState, useEffect } from 'react';
@@ -9,6 +9,8 @@ import { v4 } from 'uuid';
 import setStorages from '../../utils/functions/storage/setStorage';
 import removeStorage from '../../utils/functions/storage/removeStorage';
 import ModalShow from '../../components/modal-show/ModalShow';
+import { useDispatch, useSelector } from 'react-redux';
+import { Contato, contatoSelectAll } from '../../store/contatosSlice';
 
 type HomeProps = {
     homeState: string;
@@ -22,56 +24,61 @@ const Main = styled(Box)(() => ({
 }));
 
 function Home({ homeState }: HomeProps) {
+    const dispatch = useDispatch();
+
+    const contatosRedux = useSelector(contatoSelectAll);
+
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [address, setAddress] = useState<string>('');
-    const [contacts, setContacts] = useState<CardProps[]>([]);
-    const [searchContacts, setSearchContacts] = useState<CardProps[]>([]);
-
-    const storage = getStorages('contactList');
-    const searchInStorage = getStorages('searchedContacts');
+    const [contacts, setContacts] = useState<Contato[]>([]);
+    const [searchContacts, setSearchContacts] = useState<Contato[]>([]);
 
     useEffect(() => {
-        setContacts(storage);
-    }, [contacts]);
-
-    useEffect(() => {
-        setSearchContacts(searchInStorage);
-    }, [searchContacts]);
-
-    useEffect(() => {
-        if (homeState) {
-            const search = storage.filter(
-                (element) =>
-                    element.name.includes(homeState) ||
-                    element.phone.includes(homeState) ||
-                    element.email.includes(homeState) ||
-                    element.address.includes(homeState)
-            );
-            setSearchContacts(search);
-            setStorages('searchedContacts', search);
-        } else {
-            setSearchContacts([]);
-            setStorages('searchedContacts', []);
+        if (contatosRedux.listaContatos.length) {
+            setContacts(contatosRedux.listaContatos);
         }
-    }, [homeState]);
+    }, [contatosRedux.listaContatos]);
+    // TODO: vai continuar a refatoração na terça
+    // useEffect(() => {
+    //     setSearchContacts();
+    // }, [searchContacts]);
+
+    // useEffect(() => {
+    //     if (homeState) {
+    //         const search = storage.filter(
+    //             (element) =>
+    //                 element.name.includes(homeState) ||
+    //                 element.phone.includes(homeState) ||
+    //                 element.email.includes(homeState) ||
+    //                 element.address.includes(homeState)
+    //         );
+    //         setSearchContacts(search);
+    //         setStorages('searchedContacts', search);
+    //     } else {
+    //         setSearchContacts([]);
+    //         setStorages('searchedContacts', []);
+    //     }
+    // }, [homeState]);
 
     const handleSubmit = () => {
-        const contact = {
-            id: v4(),
-            name,
-            email,
-            phone,
-            address,
-        };
-        storage.push(contact);
-        setContacts([...contacts, contact]);
-        setStorages('contactList', storage);
-        setName('');
-        setEmail('');
-        setPhone('');
-        setAddress('');
+        alert('continua terça 24/01');
+
+        //     const contact = {
+        //         id: v4(),
+        //         name,
+        //         email,
+        //         phone,
+        //         address,
+        //     };
+        //     storage.push(contact);
+        //     setContacts([...contacts, contact]);
+        //     setStorages('contactList', storage);
+        //     setName('');
+        //     setEmail('');
+        //     setPhone('');
+        //     setAddress('');
     };
 
     const nextInput = (e: any, name?: string) => {
@@ -88,8 +95,9 @@ function Home({ homeState }: HomeProps) {
         }
     };
     const handleClearSearch = () => {
-        removeStorage('searchedContacts');
-        setSearchContacts([]);
+        alert('continua terça 24/01');
+        // removeStorage('searchedContacts');
+        //  setSearchContacts([]);
     };
     return (
         <Main>
