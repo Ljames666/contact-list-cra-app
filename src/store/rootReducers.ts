@@ -12,4 +12,5 @@ const rootReducers = combineReducers({
 });
 
 export type AppState = ReturnType<typeof rootReducers>; // cria o type dos estados
+
 export default rootReducers;

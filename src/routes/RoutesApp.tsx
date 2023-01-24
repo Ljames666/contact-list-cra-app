@@ -14,12 +14,11 @@ export type AppRoutes = {
 const routes: AppRoutes[] = [NotFoundConfig];
 
 function RoutesApp() {
-    const [state, setState] = useState<string>('');
     return (
         <BrowserRouter>
-            <NavHeader searchContactsState={setState} />
+            <NavHeader />
             <Routes>
-                <Route path="/" element={<Home homeState={state} />} />
+                <Route path='/' element={<Home />} />
                 {routes.length &&
                     routes.map((Router) => {
                         return <Route path={`/${Router.path}`} element={Router.element} />;

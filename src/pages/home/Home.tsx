@@ -4,17 +4,14 @@ import CardContact from '../../components/card-contact/CardContact';
 import { styled } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
 import { useState, useEffect } from 'react';
-import getStorages from '../../utils/functions/storage/getStorage';
+
 import { v4 } from 'uuid';
-import setStorages from '../../utils/functions/storage/setStorage';
-import removeStorage from '../../utils/functions/storage/removeStorage';
+
 import ModalShow from '../../components/modal-show/ModalShow';
 import { useDispatch, useSelector } from 'react-redux';
-import { Contato, contatoSelectAll } from '../../store/contatosSlice';
+import { Contato, addContato, contatoSelectAll } from '../../store/contatosSlice';
+import { AppDispatch } from '../../store';
 
-type HomeProps = {
-    homeState: string;
-};
 const Main = styled(Box)(() => ({
     width: '100vw',
     marginTop: '5%',
@@ -23,8 +20,8 @@ const Main = styled(Box)(() => ({
     justifyContent: 'center',
 }));
 
-function Home({ homeState }: HomeProps) {
-    const dispatch = useDispatch();
+function Home() {
+    const dispatch: AppDispatch = useDispatch();
 
     /* abaixo carregamos o estado de contatos pra uso,contatoSelectAll é variavel da linha 35 
     lá no contatos Slice, se não fizer assim deve usar o useSelector assim:
@@ -66,22 +63,18 @@ function Home({ homeState }: HomeProps) {
     // }, [homeState]);
 
     const handleSubmit = () => {
-        alert('continua terça 24/01');
-
-        //     const contact = {
-        //         id: v4(),
-        //         name,
-        //         email,
-        //         phone,
-        //         address,
-        //     };
-        //     storage.push(contact);
-        //     setContacts([...contacts, contact]);
-        //     setStorages('contactList', storage);
-        //     setName('');
-        //     setEmail('');
-        //     setPhone('');
-        //     setAddress('');
+        const contact = {
+            id: v4(),
+            name,
+            email,
+            phone,
+            address,
+        };
+        dispatch(addContato(contact));
+        setName('');
+        setEmail('');
+        setPhone('');
+        setAddress('');
     };
 
     const nextInput = (e: any, name?: string) => {
@@ -173,7 +166,7 @@ function Home({ homeState }: HomeProps) {
                         </IconButton>
                     </Box>
 
-                    {contacts.length && (
+                    {!!contacts.length && (
                         <Grid
                             container
                             spacing={2}

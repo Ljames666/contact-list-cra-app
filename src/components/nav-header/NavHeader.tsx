@@ -15,7 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import DrawerMenu from '../drawer-menu/DrawerMenu';
-import { CardProps } from '../card-contact/CardContact';
+
 import searchContacts from '../../utils/functions/search/SearchContact';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
@@ -61,7 +61,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function NavHeader({ searchContactsState }: NavProps) {
+export default function NavHeader() {
     const menuId = 'primary-search-account-menu';
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -87,24 +87,22 @@ export default function NavHeader({ searchContactsState }: NavProps) {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed">
+            <AppBar position='fixed'>
                 <Toolbar>
                     <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
+                        size='large'
+                        edge='start'
+                        color='inherit'
+                        aria-label='open drawer'
                         onClick={toggleDrawer('left', true)}
-                        sx={{ mr: 2 }}
-                    >
+                        sx={{ mr: 2 }}>
                         <MenuIcon />
                     </IconButton>
                     <Typography
-                        variant="h6"
+                        variant='h6'
                         noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
+                        component='div'
+                        sx={{ display: { xs: 'none', sm: 'block' } }}>
                         MEUSCONTATOS.COM
                     </Typography>
                     <Search>
@@ -112,15 +110,15 @@ export default function NavHeader({ searchContactsState }: NavProps) {
                             <SearchIcon />
                         </SearchIconWrapper>
                         <StyledInputBase
-                            placeholder="Search…"
+                            placeholder='Search…'
                             inputProps={{ 'aria-label': 'search' }}
                             onChange={(e) => {
-                                searchContactsState(e.target.value);
+                                // searchContactsState(e.target.value);
                                 setValue(e.target.value);
                             }}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                    searchContactsState(value);
+                                    // searchContactsState(value);
                                 }
                             }}
                         />
@@ -128,33 +126,30 @@ export default function NavHeader({ searchContactsState }: NavProps) {
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
+                            size='large'
+                            aria-label='show 17 new notifications'
+                            color='inherit'>
+                            <Badge badgeContent={17} color='error'>
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>
                         <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
+                            size='large'
+                            edge='end'
+                            aria-label='account of current user'
                             aria-controls={menuId}
-                            aria-haspopup="true"
-                            color="inherit"
-                        >
+                            aria-haspopup='true'
+                            color='inherit'>
                             <AccountCircle />
                         </IconButton>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
-                            size="large"
-                            aria-label="show more"
+                            size='large'
+                            aria-label='show more'
                             aria-controls={mobileMenuId}
-                            aria-haspopup="true"
-                            color="inherit"
-                        >
+                            aria-haspopup='true'
+                            color='inherit'>
                             <MoreIcon />
                         </IconButton>
                     </Box>

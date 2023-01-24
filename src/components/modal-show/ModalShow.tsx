@@ -7,7 +7,6 @@ import { Grid, TextField } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
-import { CardProps } from '../card-contact/CardContact';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -31,8 +30,8 @@ export default function ModalShow() {
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [address, setAddress] = useState<string>('');
-    const [contacts, setContacts] = useState<CardProps[]>([]);
-    const [searchContacts, setSearchContacts] = useState<CardProps[]>([]);
+    const [contacts, setContacts] = useState([]);
+    const [searchContacts, setSearchContacts] = useState([]);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -43,8 +42,6 @@ export default function ModalShow() {
             phone,
             address,
         };
-
-        setContacts([...contacts, contact]);
 
         setName('');
         setEmail('');
