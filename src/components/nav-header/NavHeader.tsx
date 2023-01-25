@@ -16,8 +16,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import DrawerMenu from '../drawer-menu/DrawerMenu';
 
-import searchContacts from '../../utils/functions/search/SearchContact';
-
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 type NavProps = { searchContactsState: React.Dispatch<React.SetStateAction<string>> };
 
@@ -61,7 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function NavHeader() {
+export default function NavHeader({ searchContactsState }: NavProps) {
     const menuId = 'primary-search-account-menu';
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -113,12 +111,12 @@ export default function NavHeader() {
                             placeholder='Search…'
                             inputProps={{ 'aria-label': 'search' }}
                             onChange={(e) => {
-                                // searchContactsState(e.target.value);
+                                searchContactsState(e.target.value);
                                 setValue(e.target.value);
                             }}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                    // searchContactsState(value);
+                                    searchContactsState(value);
                                 }
                             }}
                         />

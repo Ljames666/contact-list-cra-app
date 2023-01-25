@@ -1,12 +1,10 @@
-import { Box, IconButton, Grid, TextField, Button } from '@mui/material';
+import { Box, IconButton, Grid, TextField, Button, Typography } from '@mui/material';
 import CardContact from '../../components/card-contact/CardContact';
 
 import { styled } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
 import { useState, useEffect } from 'react';
-
 import { v4 } from 'uuid';
-
 import ModalShow from '../../components/modal-show/ModalShow';
 import { useDispatch, useSelector } from 'react-redux';
 import { Contato, addContato, contatoSelectAll } from '../../store/contatosSlice';
@@ -19,8 +17,11 @@ const Main = styled(Box)(() => ({
     alignItems: 'center',
     justifyContent: 'center',
 }));
+type HomeProps = {
+    homeState: string;
+};
 
-function Home() {
+function Home({ homeState }: HomeProps) {
     const dispatch: AppDispatch = useDispatch();
 
     /* abaixo carregamos o estado de contatos pra uso,contatoSelectAll é variavel da linha 35 
@@ -36,31 +37,27 @@ function Home() {
     const [searchContacts, setSearchContacts] = useState<Contato[]>([]);
 
     useEffect(() => {
-        if (contatosRedux.listaContatos.length) {
-            setContacts(contatosRedux.listaContatos);
-        }
+        setContacts(contatosRedux.listaContatos);
     }, [contatosRedux.listaContatos]);
     // TODO: vai continuar a refatoração na terça
     // useEffect(() => {
     //     setSearchContacts();
     // }, [searchContacts]);
 
-    // useEffect(() => {
-    //     if (homeState) {
-    //         const search = storage.filter(
-    //             (element) =>
-    //                 element.name.includes(homeState) ||
-    //                 element.phone.includes(homeState) ||
-    //                 element.email.includes(homeState) ||
-    //                 element.address.includes(homeState)
-    //         );
-    //         setSearchContacts(search);
-    //         setStorages('searchedContacts', search);
-    //     } else {
-    //         setSearchContacts([]);
-    //         setStorages('searchedContacts', []);
-    //     }
-    // }, [homeState]);
+    useEffect(() => {
+        if (homeState) {
+            const search = contatosRedux.listaContatos.filter(
+                (element) =>
+                    element.name.includes(homeState) ||
+                    element.phone.includes(homeState) ||
+                    element.email.includes(homeState) ||
+                    element.address.includes(homeState)
+            );
+            setSearchContacts(search);
+        } else {
+            setSearchContacts([]);
+        }
+    }, [contatosRedux.listaContatos, homeState]);
 
     const handleSubmit = () => {
         const contact = {
@@ -91,9 +88,7 @@ function Home() {
         }
     };
     const handleClearSearch = () => {
-        alert('continua terça 24/01');
-        // removeStorage('searchedContacts');
-        //  setSearchContacts([]);
+        setSearchContacts([]);
     };
     return (
         <Main>
@@ -166,7 +161,7 @@ function Home() {
                         </IconButton>
                     </Box>
 
-                    {!!contacts.length && (
+                    {contacts.length ? (
                         <Grid
                             container
                             spacing={2}
@@ -208,6 +203,17 @@ function Home() {
                                 ))
                             )}
                         </Grid>
+                    ) : (
+                        <Box
+                            sx={{
+                                width: '100%',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                color: 'whitesmoke',
+                                marginTop: 10,
+                            }}>
+                            <Typography variant='h4'>Adicione seu primeiro contato</Typography>
+                        </Box>
                     )}
                 </Grid>
             </Grid>

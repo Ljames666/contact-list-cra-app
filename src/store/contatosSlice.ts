@@ -10,13 +10,14 @@ export type Contato = {
     address: string;
 };
 
-type ContatoState = {
+export type ContatoState = {
     // aqui o type determina como vai ser o estado global de contatos
     loading: boolean; // loading para quando for executado funções assincronas(async)
     showModal: {
         // show modal controla a aparição do modal e o tipo
         open: boolean;
         type: string | undefined;
+        id?: string;
     };
     listaContatos: Array<Contato>;
 };
@@ -45,9 +46,31 @@ const contatoSlice = createSlice({
             const payloader: Contato = action.payload;
             state.listaContatos.push(payloader);
         },
+        updateContato: (state, action) => {
+            const { id, name, email, phone, address }: Contato = action.payload;
+            state.listaContatos = state.listaContatos.map((contato) => {
+                if (contato.id === id) {
+                    contato.name = name;
+                    contato.email = email;
+                    contato.phone = phone;
+                    contato.address = address;
+                    return contato;
+                }
+                return contato;
+            });
+        },
+        deleteContato: (state, action) => {
+            state.listaContatos = state.listaContatos.filter(
+                (contato) => contato.id !== action.payload
+            );
+        },
+        setShowModal: (state, action) => {
+            state.showModal = action.payload;
+        },
     },
     extraReducers: {},
 });
 
-export const { clearState, addContato } = contatoSlice.actions; // exporta as ações(metodos) do reducer (linha 41)
+export const { clearState, addContato, setShowModal, updateContato, deleteContato } =
+    contatoSlice.actions; // exporta as ações(metodos) do reducer (linha 41)
 export default contatoSlice.reducer;
